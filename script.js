@@ -25,7 +25,9 @@ window.addEventListener('scroll', () => {
         nav.style.background = "transparent";
         nav.style.padding = "30px 5%";
     }
-});// Smooth Scrolling for Navigation Links
+});
+
+// Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -41,15 +43,4 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     alert('Thank you! Our safari experts will contact you shortly.');
     form.reset();
-});
-
-// Navbar background change on scroll
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        nav.style.background = '#fff';
-        nav.style.padding = '10px 10%';
-    } else {
-        nav.style.padding = '20px 10%';
-    }
 });
