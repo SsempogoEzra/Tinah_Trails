@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 body {
@@ -15,6 +16,8 @@ body {
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
 }
+
+
 
 .container {
     width: 85%;
@@ -210,7 +213,7 @@ input, textarea {
     color: white;
 }
 
-/*Contact Page Specifics*/
+/*Contact Page Specific touches*/
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -221,6 +224,32 @@ input, textarea {
     color: #c5a059;
     margin-right: 10px;
 }
+/* Social Icons Layout */
+.social-icons-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.social-icons-row a {
+    text-decoration: none;
+    color: #556b2f;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons-row a:hover {
+    color: #c5a059;
+    transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Specific styling for the contact info icons (Phone/Email) */
+.contact-info p i {
+    color: #c5a059;
+    margin-right: 10px;
+    width: 20px;
+}
+
 /*Itinerary Specific Styles*/
 .itinerary-layout {
     display: grid;
