@@ -162,9 +162,9 @@ input, textarea {
     .hero-content h1 { font-size: 2rem; }
 }
 /* end mobile responsive*/
-/* --- Additional Page Styles --- */
+/*--- Additional Page Styles ---*/
 
-/* Page Headers (Reusable for About, Contact, etc) */
+/*Page Headers (Reusable for About, Contact, etc)*/
 .page-header {
     height: 40vh;
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1500');
@@ -177,7 +177,7 @@ input, textarea {
     text-align: center;
 }
 
-/* About Content */
+/*About page Content*/
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -190,7 +190,7 @@ input, textarea {
     border-radius: 10px;
 }
 
-/* Safari Listing Page */
+/*Safari Listing Page*/
 .safari-filters {
     padding: 20px 0;
     text-align: center;
@@ -210,7 +210,7 @@ input, textarea {
     color: white;
 }
 
-/* Contact Page Specifics */
+/*Contact Page Specifics*/
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -221,7 +221,7 @@ input, textarea {
     color: #c5a059;
     margin-right: 10px;
 }
-/* Itinerary Specific Styles */
+/*Itinerary Specific Styles*/
 .itinerary-layout {
     display: grid;
     grid-template-columns: 2fr 1fr;
