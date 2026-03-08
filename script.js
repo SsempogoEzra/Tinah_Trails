@@ -15,6 +15,29 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
 
+// Mobile Navigation Toggle
+const navSlide = () => {
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('.nav-links li');
+
+    if (burger && nav) {
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+
+            navLinks.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+            burger.classList.toggle('toggle');
+        });
+    }
+}
+navSlide();
+
 // Change navbar background on scroll
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.navbar');
@@ -39,8 +62,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Form Submission Handling
 const form = document.getElementById('safari-form');
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Thank you! Our safari experts will contact you shortly.');
-    form.reset();
-});
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you! Our safari experts will contact you shortly.');
+        form.reset();
+    });
+}
