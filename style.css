@@ -158,13 +158,6 @@ input, textarea {
     border: none;
     border-radius: 4px;
 }
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .hero-content h1 { font-size: 2rem; }
-}
-/* end mobile responsive*/
 /*--- Additional Page Styles ---*/
 
 /*Page Headers (Reusable for About, Contact, etc)*/
@@ -318,6 +311,12 @@ input, textarea {
     width: 100%;
 }
 
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-content h1 { font-size: 2rem; }
     .itinerary-layout { grid-template-columns: 1fr; }
 }
+
+/* end mobile responsive*/
