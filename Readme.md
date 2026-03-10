@@ -1,3 +1,3 @@
 # Tinah Trails and Safaris.
 
-This is a site am working on for Tinah Trails and Safari.
+This is a site am working on for Tinah Trails and Safari Company.
