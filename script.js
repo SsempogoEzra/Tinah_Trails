@@ -42,6 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
             burger.classList.toggle('toggle');
         });
     }
+    // // --- Auto-fill Country Logic ---
+    // const countryInput = document.getElementById('country-field');
+
+    // if (countryInput) {
+    //     // We fetch data from a free IP lookup service
+    //     fetch('https://ipapi.co/json/')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             // data.country_name gives us the full name (e.g., "United States")
+    //             if (data.country_name) {
+    //                 countryInput.value = data.country_name;
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log("Error fetching country:", error);
+    //             // We leave it empty if the service fails so the user can type it
+    //         });
+    // }
 });
 
 // --- 4. Navbar Scroll Effect ---
