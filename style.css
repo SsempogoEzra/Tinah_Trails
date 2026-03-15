@@ -41,51 +41,14 @@ footer{
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* Navbar Logo & Text Alignment */
 .logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    gap: 12px; /* Space between logo and text */
-}
-
-.nav-logo {
-    height: 45px; /* Fixed height for navbar */
-    width: auto;
-    border-radius: 5em;
-    object-fit: contain;
-}
-
-.logo-text {
-    font-size: 1.5rem; /* Slightly smaller to fit mobile better */
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    color: #333;
-    line-height: 1.2;
+    letter-spacing: 2px;
 }
 
-.logo-text span {
+.logo span {
     color: #556b2f; /* Olive Green */
-}
-@media (max-width: 768px) {
-    /*hide the logo image only on mobile */
-    .nav-logo {
-        display: none;
-    }
-
-    /* Adjust the gap so the text doesn't look offset */
-    .logo-link {
-        gap: 0;
-    }
-
-    .logo-text {
-        font-size: 1.5rem;
-    }
 }
 
 .nav-links {
