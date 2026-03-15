@@ -1,8 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const observerOptions = {
-        threshold: 0.1
-    };
-
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. Intersection Observer (Scroll Reveals) ---
+    const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -11,12 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, observerOptions);
 
-    // Target all elements with the 'reveal' class
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-});
 
-// Mobile Navigation Toggle
-const navSlide = () => {
+    // --- 2. Pre-fill Logic (Contact Page) ---
+    const interestInput = document.getElementById('interest-field');
+    if (interestInput) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tripType = urlParams.get('interest');
+        if (tripType) {
+            // Decodes URL characters like %20 into spaces
+            interestInput.value = `I am interested in the ${decodeURIComponent(tripType)} package. Please provide more details.`;
+        }
+    }
+
+    // --- 3. Mobile Navigation ---
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
@@ -24,7 +31,7 @@ const navSlide = () => {
     if (burger && nav) {
         burger.addEventListener('click', () => {
             nav.classList.toggle('nav-active');
-
+            
             navLinks.forEach((link, index) => {
                 if (link.style.animation) {
                     link.style.animation = '';
@@ -35,37 +42,28 @@ const navSlide = () => {
             burger.classList.toggle('toggle');
         });
     }
-}
-navSlide();
+});
 
-// Change navbar background on scroll
+// --- 4. Navbar Scroll Effect ---
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        nav.style.background = "rgba(27, 63, 45, 0.95)"; // Deep Green
-        nav.style.padding = "15px 5%";
-    } else {
-        nav.style.background = "transparent";
-        nav.style.padding = "30px 5%";
+    if (nav) {
+        if (window.scrollY > 100) {
+            nav.style.background = "rgba(27, 63, 45, 0.95)"; 
+            nav.style.padding = "15px 5%";
+        } else {
+            nav.style.background = "transparent"; // Note: Ensure your CSS doesn't conflict here
+            nav.style.padding = "30px 5%";
+        }
     }
 });
 
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Form Submission Handling
+// --- 5. Form Submission ---
 const form = document.getElementById('safari-form');
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you! Our safari experts will contact you shortly.');
+        alert('Thank you! Our safari experts at Tinah Trails will contact you shortly.');
         form.reset();
     });
 }
