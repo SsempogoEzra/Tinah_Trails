@@ -78,10 +78,49 @@ window.addEventListener('scroll', () => {
 
 // --- 5. Form Submission ---
 const form = document.getElementById('safari-form');
+// if (form) {
+//     form.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         alert('Thank you! Our safari experts at Tinah Trails will contact you shortly.');
+//         form.reset();
+//     });
+// }
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you! Our safari experts at Tinah Trails will contact you shortly.');
+
+        // 1. Collect Basic Data
+        const name = document.getElementById('user-name').value;
+        const email = document.getElementById('user-email').value;
+        const pax = document.getElementById('user-pop').value;
+        const country = document.getElementById('country').value;
+        const interest = document.getElementById('interest-field').value;
+
+        // 2. Handle Dual Currency Logic
+        const usdValue = document.getElementById('budget-usd').value;
+        const ugxValue = document.getElementById('budget-ugx').value;
+        
+        // Decide which budget string to use in the message
+        let finalBudget = "Not specified";
+        if (usdValue) {
+            finalBudget = `${usdValue} USD`;
+        } else if (ugxValue) {
+            finalBudget = `${ugxValue} UGX`;
+        }
+
+        // 3. Construct the WhatsApp message
+        const whatsappMessage = `*New Booking Request - Tinah Trails*%0A%0A` +
+            `*Client:* ${name}%0A` +
+            `*Email:* ${email}%0A` +
+            `*From:* ${country}%0A` +
+            `*Group Size:* ${pax} People%0A` +
+            `*Budget:* ${finalBudget}%0A` +
+            `*Interests:* ${interest}`;
+
+        const phoneNumber = "256762903555"; 
+        const finalUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+        
+        window.open(finalUrl, '_blank');
         form.reset();
     });
 }
