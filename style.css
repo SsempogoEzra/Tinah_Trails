@@ -18,9 +18,9 @@ h1, h2, h3 {
 }
 
 
-footer{
-    background-color: #dbe6c7;
-}
+/* footer{
+    background-color: #1b261d;
+} */
 .container {
     width: 85%;
     margin: auto;
@@ -331,6 +331,90 @@ input, textarea {
     background-color: #333;
     margin: 5px;
     transition: all 0.3s ease;
+}
+
+/* Site wide Footer-section Styles */
+.main-footer {
+    background-color: #1b261d; /* Your sage green */
+    padding: 60px 0 20px;
+    color: #f4f1ea;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #556b2f; /* Olive Green */
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #b0b0b0;
+    transition: color 0.3s ease;
+}
+
+.footer-column  ul li a:hover {
+    color: #c5a059; /* Gold baby */
+}
+
+.social-icons-row i:hover {
+    color: #c5a059;
+}
+
+
+.footer-column p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.footer-column i {
+    margin-right: 10px;
+    color: #556b2f;
+}
+
+.footer-bio {
+    margin: 15px 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #888;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Mobile Responsive Footer */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack everything in one column */
+        text-align: center;
+    }
+    
+    .footer-column {
+        margin-bottom: 20px;
+    }
+
+    .social-icons-row {
+        justify-content: center;
+    }
 }
 
 /* WhatsApp Float */
