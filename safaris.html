@@ -11,7 +11,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">TINAH <span>TRAILS</span></div>
+        <div class="logo">TINAH <span>TRAILS SAFARIS</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
@@ -31,14 +31,14 @@
 
     <section class="container">
         <div class="safari-filters">
-            <button class="filter-btn active">All Tours</button>
-            <button class="filter-btn">Gorilla Trekking</button>
-            <button class="filter-btn">Wildlife</button>
-            <button class="filter-btn">Adventure</button>
+            <button class="filter-btn active" data-filter="all">All Tours</button>
+            <button class="filter-btn" data-filter="Gorrilla-trekking">Gorilla Trekking</button>
+            <button class="filter-btn"data-filter="Wildlife">Wildlife</button>
+            <button class="filter-btn"data-filter="Couples">Couples</button>
         </div>
 
         <div class="safari-grid">
-            <div class="safari-card">
+            <div class="safari-card" data-category="Gorrilla-trekking">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=500');"></div>
                 <div class="card-content">
                     <h3>The Ultimate Gorilla Experience</h3>
@@ -46,7 +46,26 @@
                     <a href="./itinerary-template.html" class="btn">View Itinerary</a>
                 </div>
             </div>
+        </div>
+        
+        <div class="safari-card" data-category="Wildlife">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=500');"></div>
+            <div class="card-content">
+                <h3>Kazinga Channel Explorer</h3>
+                <p>Queen Elizabeth Park | 4 Days</p>
+                <a href="./itinerary-template.html" class="btn">View Itinerary</a>
             </div>
+        </div>
+
+        <div class="safari-card" data-category="Couples">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=500');"></div>
+            <div class="card-content">
+                <h3>Romantic Savanna Escape</h3>
+                <p>Luxury Wilderness | 5 Days</p>
+                <a href="./itinerary-template.html" class="btn">View Itinerary</a>
+            </div>
+        </div>
+
     </section>
 
     <footer class="main-footer">

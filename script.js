@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const tripType = urlParams.get('interest');
         if (tripType) {
-            // Decodes URL characters like %20 into spaces
             interestInput.value = `I am interested in the ${decodeURIComponent(tripType)} package. Please provide more details.`;
         }
     }
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (burger && nav) {
         burger.addEventListener('click', () => {
             nav.classList.toggle('nav-active');
-            
             navLinks.forEach((link, index) => {
                 if (link.style.animation) {
                     link.style.animation = '';
@@ -42,27 +40,49 @@ document.addEventListener('DOMContentLoaded', () => {
             burger.classList.toggle('toggle');
         });
     }
-    // // --- Auto-fill Country Logic ---
-    // const countryInput = document.getElementById('country-field');
 
-    // if (countryInput) {
-    //     // We fetch data from a free IP lookup service
-    //     fetch('https://ipapi.co/json/')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             // data.country_name gives us the full name (e.g., "United States")
-    //             if (data.country_name) {
-    //                 countryInput.value = data.country_name;
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.log("Error fetching country:", error);
-    //             // We leave it empty if the service fails so the user can type it
-    //         });
-    // }
-});
+    // --- 4. Safari Filtering Logic (Fixed Placement) ---
+    const safariGrid = document.querySelector('.safari-grid');
+    if (safariGrid) {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const safariCards = document.querySelectorAll('.safari-card');
+        
+        const applyFilter = (filterValue) => {
+            safariCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (filterValue === 'all' || category === filterValue) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
 
-// --- 4. Navbar Scroll Effect ---
+            filterButtons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === filterValue) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+
+        if (categoryParam) {
+            applyFilter(categoryParam);
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filterValue = button.getAttribute('data-filter');
+                applyFilter(filterValue);
+            });
+        });
+    }
+}); // End of DOMContentLoaded
+
+// --- 5. Navbar Scroll Effect ---
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.navbar');
     if (nav) {
@@ -70,37 +90,28 @@ window.addEventListener('scroll', () => {
             nav.style.background = "rgba(27, 63, 45, 0.95)"; 
             nav.style.padding = "15px 5%";
         } else {
-            nav.style.background = "transparent"; // Note: Ensure your CSS doesn't conflict here
+            nav.style.background = "transparent";
             nav.style.padding = "30px 5%";
         }
     }
 });
 
-// --- 5. Form Submission ---
+// --- 6. Form Submission (Fixed IDs) ---
 const form = document.getElementById('safari-form');
-// if (form) {
-//     form.addEventListener('submit', (e) => {
-//         e.preventDefault();
-//         alert('Thank you! Our safari experts at Tinah Trails will contact you shortly.');
-//         form.reset();
-//     });
-// }
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // 1. Collect Basic Data
+        // Ensure these IDs match your HTML <input id="...">
         const name = document.getElementById('user-name').value;
         const email = document.getElementById('user-email').value;
-        const pax = document.getElementById('user-pop').value;
-        const country = document.getElementById('country').value;
+        const pax = document.getElementById('user-pax').value; // Changed from user-pop
+        const country = document.getElementById('country-field').value; // Changed from country
         const interest = document.getElementById('interest-field').value;
 
-        // 2. Handle Dual Currency Logic
         const usdValue = document.getElementById('budget-usd').value;
         const ugxValue = document.getElementById('budget-ugx').value;
         
-        // Decide which budget string to use in the message
         let finalBudget = "Not specified";
         if (usdValue) {
             finalBudget = `${usdValue} USD`;
@@ -108,7 +119,6 @@ if (form) {
             finalBudget = `${ugxValue} UGX`;
         }
 
-        // 3. Construct the WhatsApp message
         const whatsappMessage = `*New Booking Request - Tinah Trails*%0A%0A` +
             `*Client:* ${name}%0A` +
             `*Email:* ${email}%0A` +
