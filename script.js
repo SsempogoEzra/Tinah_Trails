@@ -1,6 +1,34 @@
+// 1. Define standalone functions first
+function initSlider() {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    if (slides.length === 0) return;
+
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        
+        slides[index].classList.add('active');
+        if (dots[index]) dots[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 5000);
+}
+
+// 2. Main Initialization Block
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. Intersection Observer (Scroll Reveals) ---
+    // --- Initialize Slider ---
+    initSlider();
+
+    // --- Intersection Observer (Scroll Reveals) ---
     const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -12,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // --- 2. Pre-fill Logic (Contact Page) ---
+    // --- Pre-fill Logic (Contact Page) ---
     const interestInput = document.getElementById('interest-field');
     if (interestInput) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -22,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 3. Mobile Navigation ---
+    // --- Mobile Navigation ---
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
@@ -41,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. Safari Filtering Logic (Fixed Placement) ---
+    // --- Safari Filtering Logic ---
     const safariGrid = document.querySelector('.safari-grid');
     if (safariGrid) {
         const filterButtons = document.querySelectorAll('.filter-btn');
@@ -64,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.classList.remove('active');
                 }
             });
-        };
+        }; // Fixed semicolon to bracket here
 
         const urlParams = new URLSearchParams(window.location.search);
         const categoryParam = urlParams.get('category');
@@ -80,9 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-}); // End of DOMContentLoaded
+}); 
 
-// --- 5. Navbar Scroll Effect ---
+// --- Navbar Scroll Effect ---
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.navbar');
     if (nav) {
@@ -96,17 +124,16 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// --- 6. Form Submission (Fixed IDs) ---
+// --- Form Submission ---
 const form = document.getElementById('safari-form');
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // Ensure these IDs match your HTML <input id="...">
         const name = document.getElementById('user-name').value;
         const email = document.getElementById('user-email').value;
-        const pax = document.getElementById('user-pax').value; // Changed from user-pop
-        const country = document.getElementById('country-field').value; // Changed from country
+        const pax = document.getElementById('user-pax').value; 
+        const country = document.getElementById('country-field').value; 
         const interest = document.getElementById('interest-field').value;
 
         const usdValue = document.getElementById('budget-usd').value;
