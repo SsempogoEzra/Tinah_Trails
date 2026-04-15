@@ -119,7 +119,7 @@ window.addEventListener('scroll', () => {
             nav.style.padding = "15px 5%";
         } else {
             nav.style.background = "transparent";
-            nav.style.padding = "30px 5%";
+            nav.style.padding = "15px 5%";
         }
     }
 });
