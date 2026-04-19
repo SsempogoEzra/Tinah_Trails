@@ -108,6 +108,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    // --- 7. Safari Card Detail Toggle ---
+    const toggleButtons = document.querySelectorAll('.details-toggle');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const details = button.nextElementSibling;
+            
+            // Toggle the 'show' class on the details div
+            details.classList.toggle('show');
+            
+            // Toggle the rotation of the arrow icon
+            button.classList.toggle('active');
+            
+            // Optional: Change text based on state
+            if (details.classList.contains('show')) {
+                button.innerHTML = `Close Details <i class="fas fa-chevron-down"></i>`;
+            } else {
+                button.innerHTML = `View Details <i class="fas fa-chevron-down"></i>`;
+            }
+        });
+    });
 }); 
 
 // --- Navbar Scroll Effect ---
