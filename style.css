@@ -44,16 +44,42 @@ h1, h2, h3 {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.logo {
+/* .logo {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 2px;
-}
+}*/
 
-.logo span {
+/* .logo-text span {
     color: #556b2f; /* Olive Green */
+ /*}
+/* Logo & Text Wrapper */
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Space between logo and text */
+    text-decoration: none;
 }
 
+.logo img {
+    height: 50px; /* Adjust based on your logo shape */
+    width: auto;
+    border-radius: 100px; /* Optional: adds a soft look if the logo is square */
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color:#c5a059;
+    line-height: 1;
+}
+
+.logo-text span {
+    color: #556b2f; /* Your brand gold/accent color */
+    display: block; /* Moves 'TRAILS SAFARIS' below 'TINAH' if you want a stacked look */
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+}
 .nav-links {
     display: flex;
     list-style: none;
@@ -69,6 +95,18 @@ h1, h2, h3 {
 
 .nav-links li a:hover {
     color: #c5a059; /* Gold */
+}
+/* Mobile Adjustments */
+@media screen and (max-width: 768px) {
+    .logo img {
+        height: 45px;
+    }
+    .logo-text {
+        font-size: 1.4rem;
+    }
+    .logo-text span {
+        font-size: 0.8rem;
+    }
 }
 
 /* Hero Section */
