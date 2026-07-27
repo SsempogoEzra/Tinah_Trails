@@ -742,4 +742,18 @@ input, textarea {
     text-align: center;
     margin-top: 10px;
 }
-/*end of the safari hidden card 
+/*end of the safari hidden card*/
+
+.custom-form-link {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 10px;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.custom-form-link:hover {
+    color: #c5a059;
+}
