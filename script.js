@@ -129,6 +129,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // --- 8. Safari Card WhatsApp Inquiry logic ---
+    const whatsappInquireBtns = document.querySelectorAll('.whatsapp-inquire-btn');
+    
+    whatsappInquireBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get safari title from data attribute
+            const safariTitle = btn.getAttribute('data-title') || "a safari package";
+            
+            // Build message
+            const message = `Hello Tinah Trails Safaris! 👋 I would like to inquire about the *${safariTitle}* package. Please share more details and availability.`;
+            
+            // Primary company WhatsApp number
+            const phoneNumber = "256762903555"; 
+            
+            // Encode message for URL
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappUrl, '_blank');
+        });
+    });
 }); 
 
 // --- Navbar Scroll Effect ---
