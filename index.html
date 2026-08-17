@@ -27,6 +27,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <!-- <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -257,5 +259,17 @@
     </a>
 
     <script src="script.js"></script>
+    <!-- Decap intergration script -->
+    <script>
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", (user) => {
+            if (!user) {
+              window.netlifyIdentity.on("login", () => {
+                document.location.href = "/admin/";
+              });
+            }
+          });
+        }
+    </script>
 </body>
 </html>
