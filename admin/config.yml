@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "safaris"
+    label: "Safari Packages"
+    label_singular: "Safari Package"
+    folder: "content/safaris"
+    create: true
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Package Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Gorrilla-trekking", "Wildlife", "Couples"] }
+      - { label: "Card Image", name: "image", widget: "image" }
+      - { label: "Location / Subtitle", name: "location", widget: "string", help: "e.g., Bwindi Impenetrable Forest" }
+      - { label: "Duration", name: "duration", widget: "string", default: "3 Days" }
+      - { label: "Pricing Line 1", name: "price1", widget: "string", required: false, help: "e.g., Individual: $1,200 - $1,500" }
+      - { label: "Pricing Line 2", name: "price2", widget: "string", required: false, help: "e.g., Couples: $2,200 - $2,800" }
+      - { label: "Best Months", name: "best_months", widget: "string", default: "Year-round" }
