@@ -1,4 +1,7 @@
-// 1. Define standalone functions first
+// ==========================================
+// 1. STANDALONE HELPER & UTILITY FUNCTIONS
+// ==========================================
+
 function initSlider() {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -22,11 +25,169 @@ function initSlider() {
     setInterval(nextSlide, 5000);
 }
 
-// 2. Main Initialization Block
+function initCardToggles() {
+    const toggleButtons = document.querySelectorAll('.details-toggle');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const details = button.nextElementSibling;
+            
+            // Toggle the 'show' class on the details div
+            details.classList.toggle('show');
+            
+            // Toggle the rotation of the arrow icon
+            button.classList.toggle('active');
+            
+            // Change text based on state
+            if (details.classList.contains('show')) {
+                button.innerHTML = `Close Details <i class="fas fa-chevron-down"></i>`;
+            } else {
+                button.innerHTML = `View Details <i class="fas fa-chevron-down"></i>`;
+            }
+        });
+    });
+}
+
+function initWhatsAppInquiries() {
+    const whatsappInquireBtns = document.querySelectorAll('.whatsapp-inquire-btn');
+    
+    whatsappInquireBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get safari title from data attribute
+            const safariTitle = btn.getAttribute('data-title') || "a safari package";
+            
+            // Build message
+            const message = `Hello Tinah Trails Safaris! 👋 I would like to inquire about the *${safariTitle}* package. Please share more details and availability.`;
+            
+            // Primary company WhatsApp number
+            const phoneNumber = "256762903555"; 
+            
+            // Encode message for URL
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappUrl, '_blank');
+        });
+    });
+}
+
+function initSafariFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const safariCards = document.querySelectorAll('.safari-card');
+    
+    if (filterButtons.length === 0) return;
+
+    const applyFilter = (filterValue) => {
+        safariCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filterValue === 'all' || category === filterValue) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        filterButtons.forEach(btn => {
+            if (btn.getAttribute('data-filter') === filterValue) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+
+    if (categoryParam) {
+        applyFilter(categoryParam);
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filterValue = button.getAttribute('data-filter');
+            applyFilter(filterValue);
+        });
+    });
+}
+
+async function loadSafariPackages() {
+    const gridContainer = document.getElementById('safari-grid-container');
+    if (!gridContainer) return;
+
+    // List of JSON files created by Decap CMS
+    const safariFiles = [
+        'the-ultimate-gorilla-experience.json'
+        // ,'kazinga-channel-explorer.json',
+        // 'honeymoon-in-the-wild.json',
+        // 'the-pearl-explorer.json',
+        // 'lions-of-queen-elizabeth.json'
+    ];
+
+    try {
+        const fetchPromises = safariFiles.map(file => 
+            fetch(`./content/safaris/${file}`).then(res => res.json())
+        );
+        const safariDataList = await Promise.all(fetchPromises);
+
+        // Clear loading message
+        gridContainer.innerHTML = '';
+
+        safariDataList.forEach(data => {
+            const cardHTML = `
+                <div class="safari-card" data-category="${data.category}">
+                    <div class="card-img" style="background-image: url('${data.image}');"></div>
+                    <div class="card-content">
+                        <h3>${data.title}</h3>
+                        <p>${data.location}</p>
+                        
+                        <button class="details-toggle">View Details <i class="fas fa-chevron-down"></i></button>
+                        
+                        <div class="card-details">
+                            <ul class="details-list">
+                                <li><strong><i class="far fa-clock"></i> Duration:</strong> ${data.duration}</li>
+                                ${data.price1 ? `<li><strong><i class="fas fa-user"></i> ${data.price1}</li>` : ''}
+                                ${data.price2 ? `<li><strong><i class="fas fa-heart"></i> ${data.price2}</li>` : ''}
+                                <li><strong><i class="far fa-calendar-alt"></i> Best Months:</strong> ${data.best_months}</li>
+                            </ul>
+                            <a href="#" class="btn full-width whatsapp-inquire-btn" data-title="${data.title}">
+                                <i class="fab fa-whatsapp"></i> Inquire via WhatsApp
+                            </a>
+                            <a href="contact.html?interest=${encodeURIComponent(data.title)}" class="custom-form-link">
+                                Or request an email quote &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+        });
+
+        // Initialize listeners AFTER elements exist in the DOM
+        initCardToggles();
+        initWhatsAppInquiries();
+        initSafariFilters();
+
+    } catch (error) {
+        console.error('Error loading safari packages:', error);
+        gridContainer.innerHTML = '<p>Unable to load safaris at this time. Please try refreshing.</p>';
+    }
+}
+
+
+// ==========================================
+// 2. MAIN INITIALIZATION BLOCK
+// ==========================================
+
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- Initialize Slider ---
+    // --- Initialize Hero Slider ---
     initSlider();
+
+    // --- Dynamic Safari Package Loader ---
+    loadSafariPackages();
 
     // --- Intersection Observer (Scroll Reveals) ---
     const observerOptions = { threshold: 0.1 };
@@ -68,92 +229,12 @@ document.addEventListener('DOMContentLoaded', () => {
             burger.classList.toggle('toggle');
         });
     }
-
-    // --- Safari Filtering Logic ---
-    const safariGrid = document.querySelector('.safari-grid');
-    if (safariGrid) {
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const safariCards = document.querySelectorAll('.safari-card');
-        
-        const applyFilter = (filterValue) => {
-            safariCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                if (filterValue === 'all' || category === filterValue) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            filterButtons.forEach(btn => {
-                if (btn.getAttribute('data-filter') === filterValue) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }; // Fixed semicolon to bracket here
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const categoryParam = urlParams.get('category');
-
-        if (categoryParam) {
-            applyFilter(categoryParam);
-        }
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const filterValue = button.getAttribute('data-filter');
-                applyFilter(filterValue);
-            });
-        });
-    }
-    // --- 7. Safari Card Detail Toggle ---
-    const toggleButtons = document.querySelectorAll('.details-toggle');
-    
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const details = button.nextElementSibling;
-            
-            // Toggle the 'show' class on the details div
-            details.classList.toggle('show');
-            
-            // Toggle the rotation of the arrow icon
-            button.classList.toggle('active');
-            
-            // Optional: Change text based on state
-            if (details.classList.contains('show')) {
-                button.innerHTML = `Close Details <i class="fas fa-chevron-down"></i>`;
-            } else {
-                button.innerHTML = `View Details <i class="fas fa-chevron-down"></i>`;
-            }
-        });
-    });
-
-    // --- 8. Safari Card WhatsApp Inquiry logic ---
-    const whatsappInquireBtns = document.querySelectorAll('.whatsapp-inquire-btn');
-    
-    whatsappInquireBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Get safari title from data attribute
-            const safariTitle = btn.getAttribute('data-title') || "a safari package";
-            
-            // Build message
-            const message = `Hello Tinah Trails Safaris! 👋 I would like to inquire about the *${safariTitle}* package. Please share more details and availability.`;
-            
-            // Primary company WhatsApp number
-            const phoneNumber = "256762903555"; 
-            
-            // Encode message for URL
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            
-            // Open WhatsApp in a new tab
-            window.open(whatsappUrl, '_blank');
-        });
-    });
 }); 
+
+
+// ==========================================
+// 3. GLOBAL EVENT LISTENERS
+// ==========================================
 
 // --- Navbar Scroll Effect ---
 window.addEventListener('scroll', () => {
