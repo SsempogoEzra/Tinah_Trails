@@ -83,7 +83,7 @@ function initSafariFilters() {
         safariCards.forEach(card => {
             const category = card.getAttribute('data-category');
             if (filterValue === 'all' || category === filterValue) {
-                card.style.display = 'block';
+                card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
             }

@@ -153,20 +153,29 @@ h1, h2, h3 {
 }
 
 .safari-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap into rows automatically */
+    gap: 25px; /* Sets even spacing between cards */
+    justify-content:flex-start; /* Aligns cards neatly from left to right */
+    align-items:flex-start;
 }
 
 .safari-card {
+    flex: 0 1 calc(25%-19px);
+    max-width:500px;;
+    min-width: 260px;
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display:flex;
+    flex-direction: column;
+    height: auto;
 }
 
 .card-img {
     height: 250px;
+    width:100%;
     background-size: cover;
     background-position: center;
     transition: transform 0.5s ease;
