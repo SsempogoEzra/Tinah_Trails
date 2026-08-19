@@ -120,10 +120,10 @@ async function loadSafariPackages() {
     // List of JSON files created by Decap CMS
     const safariFiles = [
         'the-ultimate-gorilla-experience.json'
-        // ,'kazinga-channel-explorer.json',
-        // 'honeymoon-in-the-wild.json',
-        // 'the-pearl-explorer.json',
-        // 'lions-of-queen-elizabeth.json'
+        ,'kazinga-channel-explorer.json',
+        'honeymoon-in-the-wild.json',
+        'the-pearl-explorer.json',
+        'lions-of-queen-elizabeth.json'
     ];
 
     try {
