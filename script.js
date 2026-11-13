@@ -113,20 +113,27 @@ function initSafariFilters() {
     });
 }
 
+// ==========================================
+// 1.2. LE SAFARI PACKAGE LOADEERRR
+// ==========================================
 async function loadSafariPackages() {
     const gridContainer = document.getElementById('safari-grid-container');
     if (!gridContainer) return;
 
-    // List of JSON files created by Decap CMS
-    const safariFiles = [
-        'the-ultimate-gorilla-experience.json'
-        ,'kazinga-channel-explorer.json',
-        'honeymoon-in-the-wild.json',
-        'the-pearl-explorer.json',
-        'lions-of-queen-elizabeth.json'
-    ];
+    // // List of JSON files created by Decap CMS
+    // const safariFiles = [
+    //     'the-ultimate-gorilla-experience.json'
+    //     ,'kazinga-channel-explorer.json',
+    //     'honeymoon-in-the-wild.json',
+    //     'the-pearl-explorer.json',
+    //     'lions-of-queen-elizabeth.json','test-package.json'
+    // ];
 
     try {
+        // Fetch the dynamically generated file index
+        const indexResponse = await fetch('./content/safaris-index.json');
+        const safariFiles = await indexResponse.json();
+
         const fetchPromises = safariFiles.map(file => 
             fetch(`./content/safaris/${file}`).then(res => res.json())
         );
