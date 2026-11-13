@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const contentDir = path.join(__dirname, './content/safaris');
-const outputFile = path.join(__dirname, './content/safaris-index.json');
+const contentDir = path.join(__dirname, '../content/safaris');
+const outputFile = path.join(__dirname, '../content/safaris-index.json');
 
 fs.readdir(contentDir, (err, files) => {
     if (err) {
