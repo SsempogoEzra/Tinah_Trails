@@ -114,7 +114,7 @@ function initSafariFilters() {
 }
 
 // ==========================================
-// 1.2. LE SAFARI PACKAGE LOADEERRR
+// 1.2. LE SAFARI PACKAGE LOADEERRR yeer
 // ==========================================
 async function loadSafariPackages() {
     const gridContainer = document.getElementById('safari-grid-container');
